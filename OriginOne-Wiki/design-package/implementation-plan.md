@@ -32,12 +32,15 @@
 ## validation_commands
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 -m py_compile scripts/llm_wiki_demo.py scripts/make_terminal_screenshots.py
 python3 scripts/llm_wiki_demo.py map
 python3 scripts/llm_wiki_demo.py demo-all
-/Users/mac/miniconda3/bin/python3 scripts/make_terminal_screenshots.py assets/screenshots/*.txt
-python3 /Users/mac/.codex/skills/originoneai-llm-wiki-builder/scripts/validate_wiki_plan.py design-package
+python3 -m pip install -r requirements.txt
+bash scripts/regenerate_screenshots.sh
+bash scripts/smoke_test.sh
+python3 scripts/validate_design_package.py design-package
 ```
 
 ## acceptance_checklist

@@ -19,7 +19,8 @@
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py weave 01-retrieve-first
 python3 scripts/llm_wiki_demo.py ask 01-retrieve-first "为什么要由取倒推存"
 ```

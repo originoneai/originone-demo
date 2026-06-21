@@ -49,7 +49,7 @@
 
 ## constraints
 
-- 目标根目录固定为 `/Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki`。
+- 目标根目录固定为 `originone-demo/OriginOne-Wiki`。
 - 默认只用 macOS 终端、Python3、Markdown。
 - 内容必须面向新手，减少术语密度。
 - 示例材料必须可公开展示，不放私密聊天或真实客户数据。

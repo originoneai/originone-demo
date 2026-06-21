@@ -17,15 +17,16 @@
 
 所以这篇不继续讲抽象概念。
 
-我们直接从一个可以运行的本地目录开始。
+我们直接从一个可以运行的 GitHub 仓库开始。
 
 案例目录在：
 
 ```bash
-/Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+originone-demo/OriginOne-Wiki
 ```
 
-后续这套内容可以推到 `originoneai/originone-demo`，作为一个给新手看的 LLM-Wiki 0-1 终端案例。
+这套内容已经放在 `originoneai/originone-demo`，可以作为一个给新手看的 LLM-Wiki 0-1 终端案例。
 
 这版先不接 Obsidian，也不接数据库、向量库、外部模型 API。脚本用确定性规则模拟 LLM-Wiki 的几个核心动作：`map`（看结构）、`weave`（编织）、`ask`（检索提问）。
 
@@ -38,7 +39,8 @@
 进入项目目录：
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 ```
 
 先看项目提供了哪些阶段：
@@ -597,7 +599,8 @@ Health-Check 可以翻译成健康检查。
 如果你只想先跑一遍，按下面顺序执行：
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 
 python3 scripts/llm_wiki_demo.py map
 
@@ -614,13 +617,15 @@ python3 scripts/llm_wiki_demo.py ask 05-scenario-personal-kb "全栈项目知识
 如果要重新生成截图：
 
 ```bash
-/Users/mac/miniconda3/bin/python3 scripts/make_terminal_screenshots.py assets/screenshots/*.txt
+python3 -m pip install -r requirements.txt
+bash scripts/regenerate_screenshots.sh
 ```
 
-如果要验证设计包：
+如果要验证示例和设计包：
 
 ```bash
-python3 /Users/mac/.codex/skills/originoneai-llm-wiki-builder/scripts/validate_wiki_plan.py design-package
+bash scripts/smoke_test.sh
+python3 scripts/validate_design_package.py design-package
 ```
 
 这篇实操文想让新手先建立一个很朴素的判断：

@@ -29,7 +29,8 @@ output/
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py weave 05-scenario-personal-kb
 python3 scripts/llm_wiki_demo.py ask 05-scenario-personal-kb "全栈项目知识库怎么自动生成需求并维护规则"
 ```

@@ -29,7 +29,8 @@ output 先保存
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py weave 03-output-and-reuse
 python3 scripts/llm_wiki_demo.py ask 03-output-and-reuse "output 保存什么 为什么不能直接当 wiki"
 ```

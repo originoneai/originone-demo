@@ -36,7 +36,8 @@ output/
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py weave 04-scenario-data-dev
 python3 scripts/llm_wiki_demo.py ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
 ```

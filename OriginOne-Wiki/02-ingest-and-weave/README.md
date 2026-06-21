@@ -18,7 +18,8 @@ raw -> source_summary -> long-term wiki
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py weave 02-ingest-and-weave
 python3 scripts/llm_wiki_demo.py ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
 ```

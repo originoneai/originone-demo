@@ -20,6 +20,29 @@ output/ 本次任务产物，比如回答、清单、文章草稿
 
 等这套最小流程跑通，再换成 Obsidian、Web App、数据库或 SaaS 都不迟。
 
+## 一键运行
+
+从 GitHub 克隆后，复制下面这段命令即可运行：
+
+```bash
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
+bash scripts/smoke_test.sh
+```
+
+如果已经在 `OriginOne-Wiki/` 目录内：
+
+```bash
+bash scripts/smoke_test.sh
+```
+
+`smoke_test.sh` 会做四件事：
+
+- 检查 Python 脚本语法。
+- 跑通 `map` 和 `demo-all`。
+- 检查文章引用的 6 张终端截图是否存在。
+- 校验 `design-package/` 是否包含完整设计文件。
+
 ## 阶段目录
 
 | 阶段 | 目录 | 目标 |
@@ -34,7 +57,8 @@ output/ 本次任务产物，比如回答、清单、文章草稿
 ## 快速运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py map
 python3 scripts/llm_wiki_demo.py ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
 python3 scripts/llm_wiki_demo.py weave 02-ingest-and-weave
@@ -45,7 +69,14 @@ python3 scripts/llm_wiki_demo.py demo-all
 如果要重新生成文章截图，使用这条命令：
 
 ```bash
-/Users/mac/miniconda3/bin/python3 scripts/make_terminal_screenshots.py assets/screenshots/*.txt
+python3 -m pip install -r requirements.txt
+bash scripts/regenerate_screenshots.sh
+```
+
+如果只想校验设计包：
+
+```bash
+python3 scripts/validate_design_package.py design-package
 ```
 
 ## 文章草稿

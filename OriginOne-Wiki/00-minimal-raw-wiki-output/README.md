@@ -19,7 +19,8 @@ output/  保存本次回答
 ## 运行
 
 ```bash
-cd /Users/mac/Documents/OriginOne-Demo/OriginOne-Wiki
+git clone https://github.com/originoneai/originone-demo.git
+cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py map
 python3 scripts/llm_wiki_demo.py ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
 ```
