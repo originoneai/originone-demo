@@ -1,0 +1,12 @@
+$ python3 scripts/llm_wiki_demo.py ask 01-retrieve-first 为什么要由取倒推存
+问题: 为什么要由取倒推存
+检索顺序: wiki -> raw
+命中的材料:
+- [wiki] wiki/concept-retrieve-first.md score=6
+- [wiki] wiki/index.md score=4
+- [wiki] wiki/concept-llm-wiki.md score=2
+
+由取倒推存，就是先想以后要问什么、要拿到什么结果，再决定 raw 留哪些材料、wiki 编哪些页面、output
+保存哪些产物。这样目录会服务真实检索，而不是变成好看的空文件夹。
+
+已保存 output/ask-为什么要由取倒推存.md

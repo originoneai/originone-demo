@@ -1,0 +1,10 @@
+$ python3 scripts/llm_wiki_demo.py weave 02-ingest-and-weave
+开始编织: 02-ingest-and-weave
+raw 文件数: 2
++ wiki/source-summary-001-karpathy-style-note.md
++ wiki/source-summary-002-source-summary-note.md
++ wiki/concept-llm-wiki.md
++ wiki/concept-retrieve-first.md
++ wiki/concept-source-summary.md
++ wiki/concept-personal-learning.md
+编织完成。建议下一步运行 ask 命令看看检索效果。

@@ -1,0 +1,12 @@
+$ python3 scripts/llm_wiki_demo.py ask 05-scenario-personal-kb 全栈项目知识库怎么自动生成需求并维护规则
+问题: 全栈项目知识库怎么自动生成需求并维护规则
+检索顺序: wiki -> raw
+命中的材料:
+- [wiki] wiki/source-summary-originals-project-brief-md.md score=9
+- [wiki] wiki/source-summary-cards-source-card-project-brief-md.md score=7
+- [raw] raw/originals/project-brief.md score=9
+
+项目知识库可以把业务目标、接口草稿、规则说明和历史决策先放 raw，再编成 project、workflow、semantic rules 等
+wiki 页面。output 保存本次生成的需求、任务拆分和验收清单，稳定规则再回写 wiki。
+
+已保存 output/ask-全栈项目知识库怎么自动生成需求并维护规则.md
