@@ -31,6 +31,6 @@ output 先保存
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 scripts/llm_wiki_demo.py weave 03-output-and-reuse
-python3 scripts/llm_wiki_demo.py ask 03-output-and-reuse "output 保存什么 为什么不能直接当 wiki"
+bash scripts/llm_wiki_agent.sh weave 03-output-and-reuse
+bash scripts/llm_wiki_agent.sh ask 03-output-and-reuse "output 保存什么 为什么不能直接当 wiki"
 ```

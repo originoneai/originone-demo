@@ -1,6 +1,6 @@
 # 04 场景一：数仓日常工作的 LLM-Wiki MVP
 
-这一阶段不再只演示“查指标口径”，而是抄数仓日常工作里的三个核心场景：
+这一阶段不再只演示“查指标口径”，而是贴近数仓日常工作里的三个核心场景：
 
 - 数据问题排查：GMV 为什么突然下降。
 - 任务问题诊断：同步任务是不是因为字段变化失败。
@@ -26,7 +26,7 @@ raw/
     tickets/           # 事故单、需求单、任务失败记录
     schema-changes/    # 表结构变更单
   cards/               # source card：一份原始材料的一张入口卡
-wiki/                  # 由脚本编织出的长期知识
+wiki/                  # 由 LLM Agent 编织出的长期知识
 output/
   health-check/        # 字段映射健康度报告
   impact-analysis/     # 表结构变更影响分析
@@ -38,8 +38,8 @@ output/
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 scripts/llm_wiki_demo.py weave 04-scenario-data-dev
-python3 scripts/llm_wiki_demo.py ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
+bash scripts/llm_wiki_agent.sh weave 04-scenario-data-dev
+bash scripts/llm_wiki_agent.sh ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
 ```
 
 ## 读结果
@@ -49,4 +49,4 @@ python3 scripts/llm_wiki_demo.py ask 04-scenario-data-dev "订单表 drop column
 - `output/health-check/field-mapping-health-report.md` 是本次 DDL + SQL 的字段映射健康报告。
 - `output/impact-analysis/order-drop-refund-amount.md` 是本次 `drop column` 的影响分析。
 
-新手要看到这里的边界：raw 负责保留证据，wiki 负责长期复用，output 负责本次交付。健康报告如果变成稳定规则，再从 output 回写进 wiki。
+跑到这里，先记住这个边界：raw 负责保留证据，wiki 负责长期复用，output 负责本次交付。健康报告如果变成稳定规则，再从 output 回写进 wiki。

@@ -3,11 +3,18 @@
 ## Tree
 
     OriginOne-Wiki/
+    ├── .env.example
     ├── README.md
+    ├── prompts/
+    │   ├── llm-wiki-system.md
+    │   └── actions/{weave,ask,health-check}.md
     ├── scripts/
-    │   ├── llm_wiki_demo.py
+    │   ├── llm_wiki_agent.sh
+    │   ├── llm_wiki_api_runner.sh
+    │   ├── check_llm_runtime.sh
+    │   ├── lib/{load_env.sh,llm_wiki_api_runner.mjs}
     │   ├── smoke_test.sh
-    │   └── validate_design_package.py
+    │   └── validate_design_package.sh
     ├── design-package/
     ├── 00-minimal-raw-wiki-output/
     │   ├── raw/
@@ -31,7 +38,9 @@
 | path | serves_contract | owner | required | notes |
 |---|---|---|---|---|
 | README.md | Product Brief | author | MVP | demo 总入口 |
-| scripts/ | Operational State | script | MVP | 真实运行、smoke test 和设计包校验 |
+| .env.example | Runtime Config | author | MVP | 本地 LLM Agent 与 API Key 配置模板，不保存真实 Key |
+| prompts/ | LLM Agent Contract | author | MVP | 定义 weave、ask、health-check 的 Agent 任务协议 |
+| scripts/ | Operational State | shell harness | MVP | Agent 调用、API runner、prompt/manual 打包、runtime 检查、smoke test 和设计包校验 |
 | design-package/ | Governance | author | MVP | 设计合同与验收 |
 | 00-minimal-raw-wiki-output/ | Retrieval Contract: basic explanation | author | MVP | 最小三目录 |
 | 01-retrieve-first/ | Retrieval Contract: retrieve-first | author | MVP | 由取倒推存 |
@@ -48,4 +57,4 @@
 - `db/`：暂不需要数据库。
 - `frontend/`：暂不做 Web UI。
 - `private/`：本 demo 不放真实私有资料。
-- `vector/`：新手阶段不引入向量库。
+- `vector/`：入门阶段不引入向量库。

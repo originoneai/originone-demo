@@ -21,10 +21,10 @@
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 scripts/llm_wiki_demo.py weave 01-retrieve-first
-python3 scripts/llm_wiki_demo.py ask 01-retrieve-first "为什么要由取倒推存"
+bash scripts/llm_wiki_agent.sh weave 01-retrieve-first
+bash scripts/llm_wiki_agent.sh ask 01-retrieve-first "为什么要由取倒推存"
 ```
 
 ## 看什么
 
-看 `wiki/index.md`，它就是最小版的检索入口。新手先不需要向量库，也不用复杂搜索，先学会让 wiki 有一个清楚入口。
+看 `wiki/index.md`，它就是最小版的检索入口。第一次运行时先不用向量库，也不用复杂搜索，先学会让 wiki 有一个清楚入口。

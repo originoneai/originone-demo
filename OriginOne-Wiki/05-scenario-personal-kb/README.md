@@ -31,8 +31,8 @@ output/
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 scripts/llm_wiki_demo.py weave 05-scenario-personal-kb
-python3 scripts/llm_wiki_demo.py ask 05-scenario-personal-kb "全栈项目知识库怎么自动生成需求并维护规则"
+bash scripts/llm_wiki_agent.sh weave 05-scenario-personal-kb
+bash scripts/llm_wiki_agent.sh ask 05-scenario-personal-kb "全栈项目知识库怎么自动生成需求并维护规则"
 ```
 
 ## 读结果
@@ -42,4 +42,4 @@ python3 scripts/llm_wiki_demo.py ask 05-scenario-personal-kb "全栈项目知识
 - `output/requirements/generated-requirements.md` 是一次需求生成结果。
 - `output/rules/rules-maintenance-checklist.md` 是规则维护清单。
 
-新手要看到这里的边界：原件不能为了“变整齐”而改掉，source card 是入口，wiki 是稳定知识，output 是这次生成的需求或诊断。
+跑到这里，先记住这个边界：原件不能为了“变整齐”而改掉，source card 是入口，wiki 是稳定知识，output 是这次生成的需求或诊断。

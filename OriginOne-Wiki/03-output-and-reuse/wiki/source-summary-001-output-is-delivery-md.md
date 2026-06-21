@@ -8,7 +8,7 @@ confidence: medium
 
 ## 一句话摘要
 
-核心观点：output 保存本次任务结果。它可以帮助你交付当下任务，但不能自动进入长期知识。 例如你问 AI：“帮我把 LLM-Wiki 的 raw/wiki/output 讲给新手。”这次回答就应该先保存到 output。 如果回答里出现
+核心观点：output 保存本次任务结果。它可以帮助你交付当下任务，但不能自动进入长期知识。 例如你问 AI：“帮我把 LLM-Wiki 的 raw/wiki/output 讲给第一次接触的人。”这次回答就应该先保存到 output。 如果
 
 ## 这份 raw 适合回织到哪里
 

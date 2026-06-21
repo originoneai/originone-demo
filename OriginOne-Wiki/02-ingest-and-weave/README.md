@@ -20,8 +20,8 @@ raw -> source_summary -> long-term wiki
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 scripts/llm_wiki_demo.py weave 02-ingest-and-weave
-python3 scripts/llm_wiki_demo.py ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
+bash scripts/llm_wiki_agent.sh weave 02-ingest-and-weave
+bash scripts/llm_wiki_agent.sh ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
 ```
 
 ## 看什么
@@ -30,4 +30,4 @@ python3 scripts/llm_wiki_demo.py ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw
 - `wiki/concept-*`：长期知识页。
 - `wiki/index.md`：以后检索先读这里。
 
-这个阶段最适合观察编织过程：终端会显示从 raw 生成了哪些 wiki 页面。
+这个阶段最适合观察编织过程：LLM Agent 会读取 raw，并把生成或更新的 wiki 页面写回目录。
