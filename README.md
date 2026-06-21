@@ -43,6 +43,48 @@ bash scripts/llm_wiki_api_runner.sh ask 00-minimal-raw-wiki-output "raw wiki out
 
 API runner 会请求 Chat Completions-compatible 接口，但不会让模型直接碰文件系统。模型只能返回 JSON；脚本只允许 `ask` 写 `output/*.md`，只允许 `weave` 写 `wiki/*.md`，并且永远不改 `raw/`。
 
+## 三层使用示例
+
+### 第一层：manual，只有普通 LLM 对话窗口
+
+```bash
+cd originone-demo/OriginOne-Wiki
+
+# 生成一个带 stage 文件内容的 prompt，不调用模型，不改仓库
+bash scripts/llm_wiki_agent.sh manual ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么" > /tmp/originone-wiki-manual-ask.md
+bash scripts/llm_wiki_agent.sh manual weave 02-ingest-and-weave > /tmp/originone-wiki-manual-weave.md
+```
+
+把 `/tmp/originone-wiki-manual-ask.md` 或 `/tmp/originone-wiki-manual-weave.md` 的内容复制到普通 LLM 对话窗口。模型会返回建议创建或更新的文件路径和完整内容，需要你手动放回目录。
+
+### 第二层：API runner，有 DeepSeek/OpenAI-compatible Key
+
+```bash
+cd originone-demo/OriginOne-Wiki
+cp .env.example .env
+# 在 .env 里填写 DEEPSEEK_API_KEY，或填写 LLM_WIKI_API_KEY + LLM_WIKI_API_BASE_URL
+
+# 先检查请求边界，不调用模型
+bash scripts/llm_wiki_api_runner.sh dry-run ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+
+# 真实调用模型，ask 只允许写 output/*.md
+bash scripts/llm_wiki_api_runner.sh ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+
+# 真实调用模型，weave 只允许写 wiki/*.md
+bash scripts/llm_wiki_api_runner.sh weave 02-ingest-and-weave
+```
+
+### 第三层：Code Agent CLI，有 Codex/Claude/Gemini
+
+```bash
+cd originone-demo/OriginOne-Wiki
+bash scripts/check_llm_runtime.sh
+
+# 默认优先使用本机 codex；也可以在 .env 里配置 LLM_WIKI_AGENT
+bash scripts/llm_wiki_agent.sh weave 02-ingest-and-weave
+bash scripts/llm_wiki_agent.sh ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
+```
+
 如果需要配置 Key，只在本机复制 `.env.example`：
 
 ```bash

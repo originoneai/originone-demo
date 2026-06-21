@@ -56,23 +56,30 @@ bash scripts/smoke_test.sh
 
 换句话说，`smoke_test.sh` 只能证明“这套脚手架准备好了”。要看到真正的 wiki 编织、检索回答和 output 结果，需要继续运行下面的 `weave` 或 `ask`。
 
-## 没有 Code Agent CLI 怎么办
+## 三层使用示例
 
-没有 Codex CLI、Claude Code、Gemini CLI，也可以先用 manual 模式体验 LLM-Wiki 的思路：
+### 第一层：manual，只有普通 LLM 对话窗口
+
+适合没有 Codex CLI、Claude Code、Gemini CLI，也没有 API Key 的读者。它只生成 prompt，不调用模型，不改仓库。
 
 ```bash
+cd originone-demo/OriginOne-Wiki
+
+# ask：把 stage 文件和问题打包成 prompt
 bash scripts/llm_wiki_agent.sh manual ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么" > /tmp/originone-wiki-manual-ask.md
+
+# weave：把 raw/wiki/output 一起打包给普通 LLM，让它返回应更新的 wiki 文件内容
+bash scripts/llm_wiki_agent.sh manual weave 02-ingest-and-weave > /tmp/originone-wiki-manual-weave.md
 ```
 
-普通 LLM 网页不能直接读取你的本地目录，所以 manual 模式会把当前 stage 里的 `raw/`、`wiki/`、`output/` 文本文件一起打包进 prompt。把这份 prompt 交给 ChatGPT、Claude、Gemini、Kimi、DeepSeek 等对话窗口后，模型会返回应该新增或更新的文件路径和完整内容。
+接下来，把 `/tmp/originone-wiki-manual-ask.md` 或 `/tmp/originone-wiki-manual-weave.md` 的内容复制到普通 LLM 对话窗口。模型会返回建议新增或更新的文件路径和完整内容，你再手动放回对应目录。
 
-manual 模式的边界也要讲清楚：它能帮助你理解 raw、wiki、output 怎么协作，但不会自动改仓库。想让系统自动读文件、写 wiki、保存 output，需要使用 API runner 或 `weave/ask`，也就是配置一个能调用模型并安全写文件的 runtime。
+### 第二层：API runner，有 DeepSeek/OpenAI-compatible Key
 
-## 有 DeepSeek Key 怎么办
-
-如果你没有 Code Agent CLI，但有 DeepSeek Key，可以走第二层 API runner。它使用 OpenAI-compatible Chat Completions 协议，默认配置就是 DeepSeek：
+适合没有 Code Agent CLI，但有 DeepSeek、OpenAI 或其他 OpenAI-compatible API Key 的读者。它会调用模型，并由脚本安全写文件。
 
 ```bash
+cd originone-demo/OriginOne-Wiki
 cp .env.example .env
 ```
 
@@ -84,19 +91,42 @@ LLM_WIKI_API_MODEL=deepseek-v4-flash
 DEEPSEEK_API_KEY=你的_deepseek_key
 ```
 
-先 dry run（不调用模型）：
+先 dry run，不调用模型，只看请求边界：
 
 ```bash
 bash scripts/llm_wiki_api_runner.sh dry-run ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
 ```
 
-确认没问题后再真实调用：
+再真实调用：
 
 ```bash
+# ask 只允许写 output/*.md
 bash scripts/llm_wiki_api_runner.sh ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+
+# weave 只允许写 wiki/*.md
+bash scripts/llm_wiki_api_runner.sh weave 02-ingest-and-weave
 ```
 
-API runner 的边界是：模型只返回 JSON，脚本负责落盘。`ask` 只能写 `output/*.md`，`weave` 只能写 `wiki/*.md`，`raw/` 永远不允许被改。这样比 manual 自动，但比 Code Agent CLI 更可控。
+API runner 的关键边界：模型只能返回 JSON，脚本负责落盘；`raw/` 永远不允许被改。
+
+### 第三层：Code Agent CLI，有 Codex/Claude/Gemini
+
+适合已经安装 Codex CLI、Claude Code、Gemini CLI，或其他能读 stdin 并编辑仓库的 Agent 的读者。
+
+```bash
+cd originone-demo/OriginOne-Wiki
+bash scripts/check_llm_runtime.sh
+
+# 默认优先使用本机 codex
+bash scripts/llm_wiki_agent.sh weave 02-ingest-and-weave
+bash scripts/llm_wiki_agent.sh ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
+```
+
+如果不用默认 Codex CLI，可以在 `.env` 里配置：
+
+```bash
+LLM_WIKI_AGENT=claude -p --permission-mode acceptEdits
+```
 
 ## 配置 LLM 和 Key
 

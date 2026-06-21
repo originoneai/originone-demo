@@ -35,6 +35,15 @@ LLM runtime:
   self-contained prompt with the stage's text files bundled for a normal LLM
   chat window.
 
+Examples:
+  Layer 1, manual chat:
+    bash scripts/llm_wiki_agent.sh manual ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么" > /tmp/originone-wiki-manual-ask.md
+    bash scripts/llm_wiki_agent.sh manual weave 02-ingest-and-weave > /tmp/originone-wiki-manual-weave.md
+
+  Layer 3, Code Agent CLI:
+    bash scripts/llm_wiki_agent.sh weave 02-ingest-and-weave
+    bash scripts/llm_wiki_agent.sh ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
+
 Config:
   Copy .env.example to .env to configure LLM_WIKI_AGENT or API keys locally.
   The .env file is ignored by git and must never be committed.

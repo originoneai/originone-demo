@@ -24,6 +24,13 @@ The API runner calls an OpenAI-compatible Chat Completions API. It asks the
 model for file-level JSON, then writes only safe paths:
   weave -> <stage>/wiki/*.md
   ask   -> <stage>/output/*.md
+
+Examples:
+  cp .env.example .env
+  # Fill DEEPSEEK_API_KEY in .env first.
+  bash scripts/llm_wiki_api_runner.sh dry-run ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+  bash scripts/llm_wiki_api_runner.sh ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+  bash scripts/llm_wiki_api_runner.sh weave 02-ingest-and-weave
 `;
   (exitCode === 0 ? console.log : console.error)(text);
   process.exit(exitCode);

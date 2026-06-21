@@ -45,7 +45,9 @@ bash scripts/check_llm_runtime.sh --soft
 bash scripts/llm_wiki_agent.sh prompt weave 02-ingest-and-weave
 bash scripts/llm_wiki_agent.sh prompt ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
 bash scripts/llm_wiki_agent.sh manual ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+bash scripts/llm_wiki_agent.sh manual weave 02-ingest-and-weave
 bash scripts/llm_wiki_api_runner.sh dry-run ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+bash scripts/llm_wiki_api_runner.sh dry-run weave 02-ingest-and-weave
 bash scripts/llm_wiki_api_runner.sh prompt ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
 bash scripts/smoke_test.sh
 bash scripts/validate_design_package.sh design-package
@@ -67,4 +69,5 @@ bash scripts/validate_design_package.sh design-package
 - [ ] `check_llm_runtime.sh` 能显示当前可用的 Agent/runtime。
 - [ ] `smoke_test.sh` 能从 clean clone 后运行。
 - [ ] README 的一键命令能复制粘贴执行。
+- [ ] README 和脚本 help 都给出 manual、API runner、Code Agent CLI 三层使用示例。
 - [ ] 设计包通过 validator。

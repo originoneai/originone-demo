@@ -47,3 +47,27 @@
 ## operational_cost
 
 `smoke_test.sh` 不消耗模型。`prompt/manual` 和 API runner `dry-run` 只生成 prompt 或检查请求，不在脚本里调用模型。真正运行 `llm_wiki_api_runner.sh ask/weave` 会消耗所选 API provider 的额度；真正运行 `llm_wiki_agent.sh weave/ask` 会消耗所选 LLM Agent 的模型额度。manual 模式的模型消耗发生在用户选择的普通 LLM 对话窗口里。API Key 只放在本机 `.env` 或对应 CLI 的登录态里，不进入仓库。
+
+## usage_examples
+
+第一层 manual：
+
+```bash
+bash scripts/llm_wiki_agent.sh manual ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么" > /tmp/originone-wiki-manual-ask.md
+bash scripts/llm_wiki_agent.sh manual weave 02-ingest-and-weave > /tmp/originone-wiki-manual-weave.md
+```
+
+第二层 API runner：
+
+```bash
+bash scripts/llm_wiki_api_runner.sh dry-run ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+bash scripts/llm_wiki_api_runner.sh ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
+bash scripts/llm_wiki_api_runner.sh weave 02-ingest-and-weave
+```
+
+第三层 Code Agent CLI：
+
+```bash
+bash scripts/llm_wiki_agent.sh weave 02-ingest-and-weave
+bash scripts/llm_wiki_agent.sh ask 04-scenario-data-dev "订单表 drop column 会影响哪些下游表和指标"
+```

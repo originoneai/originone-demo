@@ -34,6 +34,7 @@
 - README 术语太密，没有解释 raw/wiki/output。
 - README 没有解释没有 Code Agent CLI 时怎么运行。
 - README 没有解释 DeepSeek/OpenAI-compatible API runner 的适用条件和安全边界。
+- README 或脚本 help 没有给出三层 ask/weave 使用示例。
 - output 回写 wiki 的边界没有讲清楚。
 - 04 没有解释 DDL/SQL/schema change 怎么进入影响分析。
 - 05 没有解释 originals/cards/wiki/output 的职责差异。
