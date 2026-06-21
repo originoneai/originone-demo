@@ -5,3 +5,9 @@ __pycache__/
 .venv/
 node_modules/
 
+# Local authoring assets, kept on the author's machine only.
+OriginOne-Wiki/article/
+OriginOne-Wiki/assets/
+OriginOne-Wiki/requirements.txt
+OriginOne-Wiki/scripts/make_terminal_screenshots.py
+OriginOne-Wiki/scripts/regenerate_screenshots.sh
