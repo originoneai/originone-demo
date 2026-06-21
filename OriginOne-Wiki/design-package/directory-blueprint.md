@@ -4,13 +4,10 @@
 
     OriginOne-Wiki/
     ├── README.md
-    ├── article/
-    │   └── LLM-Wiki-0-1-新手终端案例.md
-    ├── assets/
-    │   └── screenshots/
     ├── scripts/
     │   ├── llm_wiki_demo.py
-    │   └── make_terminal_screenshots.py
+    │   ├── smoke_test.sh
+    │   └── validate_design_package.py
     ├── design-package/
     ├── 00-minimal-raw-wiki-output/
     │   ├── raw/
@@ -34,10 +31,7 @@
 | path | serves_contract | owner | required | notes |
 |---|---|---|---|---|
 | README.md | Product Brief | author | MVP | demo 总入口 |
-| article/ | Release Share | author | MVP | 面向新手的文章草稿 |
-| assets/ | Retrieval Package | script | MVP | 截图和文章素材根目录 |
-| assets/screenshots/ | Retrieval Package | script | MVP | 终端运行截图 |
-| scripts/ | Operational State | script | MVP | 真实运行和截图生成 |
+| scripts/ | Operational State | script | MVP | 真实运行、smoke test 和设计包校验 |
 | design-package/ | Governance | author | MVP | 设计合同与验收 |
 | 00-minimal-raw-wiki-output/ | Retrieval Contract: basic explanation | author | MVP | 最小三目录 |
 | 01-retrieve-first/ | Retrieval Contract: retrieve-first | author | MVP | 由取倒推存 |

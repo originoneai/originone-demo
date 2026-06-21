@@ -9,9 +9,9 @@
 - 在 04 增加数据开发 output：字段映射健康报告、schema change 影响分析、事故诊断。
 - 在 05 增加项目知识库 output：需求草案、规则维护清单、任务诊断。
 - 提供 `llm_wiki_demo.py`，支持 `map`、`weave`、`ask`、`demo-all`。
-- 提供 `make_terminal_screenshots.py`，把 transcript 渲染为 PNG。
-- 写入新手文章草稿。
-- 运行每个阶段并生成截图。
+- 提供 `smoke_test.sh`，让读者 clone 后一键验证。
+- 提供 `validate_design_package.py`，让设计包校验不依赖本机私有路径。
+- 运行每个阶段并保存可检查 output。
 
 ## vNext
 
@@ -34,11 +34,9 @@
 ```bash
 git clone https://github.com/originoneai/originone-demo.git
 cd originone-demo/OriginOne-Wiki
-python3 -m py_compile scripts/llm_wiki_demo.py scripts/make_terminal_screenshots.py
+python3 -m py_compile scripts/llm_wiki_demo.py scripts/validate_design_package.py
 python3 scripts/llm_wiki_demo.py map
 python3 scripts/llm_wiki_demo.py demo-all
-python3 -m pip install -r requirements.txt
-bash scripts/regenerate_screenshots.sh
 bash scripts/smoke_test.sh
 python3 scripts/validate_design_package.py design-package
 ```
@@ -51,6 +49,6 @@ python3 scripts/validate_design_package.py design-package
 - [ ] 05 能展示 requirements、rules、diagnosis。
 - [ ] `weave` 能生成 source summary 和 concept。
 - [ ] `ask` 能保存 output。
-- [ ] 截图 PNG 能生成。
-- [ ] 文章能引用命令、目录和截图。
+- [ ] `smoke_test.sh` 能从 clean clone 后运行。
+- [ ] README 的一键命令能复制粘贴执行。
 - [ ] 设计包通过 validator。

@@ -27,17 +27,7 @@ python3 scripts/llm_wiki_demo.py demo-all
 python3 scripts/validate_design_package.py design-package
 ```
 
-如果要重新生成文章截图：
-
-```bash
-cd originone-demo/OriginOne-Wiki
-python3 -m pip install -r requirements.txt
-bash scripts/regenerate_screenshots.sh
-```
-
 ## 内容结构
 
 - `OriginOne-Wiki/scripts/`：可运行脚本。
-- `OriginOne-Wiki/assets/screenshots/`：终端截图与 transcript。
-- `OriginOne-Wiki/article/`：面向新手的实操文章。
 - `OriginOne-Wiki/design-package/`：LLM-Wiki 设计契约与验收材料。

@@ -1,9 +1,0 @@
-$ python3 scripts/llm_wiki_demo.py map
-LLM-Wiki 最小地图
-========================================
-raw/    : 原始材料。先保留事实，不急着改写。
-wiki/   : 长期知识。把多份 raw 编织成能复用的页面。
-output/ : 本次任务产物。回答、清单、文章草稿、复盘结果。
-
-检索顺序：先读 wiki，wiki 不够再回 raw 查证据。
-设计顺序：先问以后要取什么，再决定 raw/wiki/output 怎么放。

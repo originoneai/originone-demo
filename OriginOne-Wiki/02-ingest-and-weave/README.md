@@ -30,4 +30,4 @@ python3 scripts/llm_wiki_demo.py ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw
 - `wiki/concept-*`：长期知识页。
 - `wiki/index.md`：以后检索先读这里。
 
-这个阶段最适合截图：终端会显示从 raw 生成了哪些 wiki 页面。
+这个阶段最适合观察编织过程：终端会显示从 raw 生成了哪些 wiki 页面。

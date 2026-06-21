@@ -122,7 +122,7 @@ def map_command() -> None:
     print("=" * 40)
     print("raw/    : 原始材料。先保留事实，不急着改写。")
     print("wiki/   : 长期知识。把多份 raw 编织成能复用的页面。")
-    print("output/ : 本次任务产物。回答、清单、文章草稿、复盘结果。")
+    print("output/ : 本次任务产物。回答、清单、报告草稿、复盘结果。")
     print()
     print("检索顺序：先读 wiki，wiki 不够再回 raw 查证据。")
     print("设计顺序：先问以后要取什么，再决定 raw/wiki/output 怎么放。")
@@ -323,7 +323,7 @@ def build_answer(question: str, selected: list[tuple[str, Path, int, str]]) -> s
     if "编织" in question or "weave" in q:
         return "编织就是把 raw 先整理成一源一页的 source summary，再把多份 summary 合并到 concept、entity、synthesis 等长期 wiki 页里。raw 不改，wiki 才负责复用和合并。"
     if "output" in q:
-        return "output 保存本次任务结果，比如一段回答、一个检查清单、一篇草稿。它的作用是交付当下任务；只有反复会用、经检查可靠的部分，才应该回写到 wiki。"
+        return "output 保存本次任务结果，比如一段回答、一个检查清单、一份报告草稿。它的作用是交付当下任务；只有反复会用、经检查可靠的部分，才应该回写到 wiki。"
     if "drop" in q or "column" in q or "表结构" in question or "影响" in question:
         return "表结构变更要先查 wiki 里的字段血缘、指标口径和同步任务规则，再回到 raw 的 DDL、宽表 SQL、变更单核对证据。output 里应该保存影响表清单、风险等级和改动方案，而不是只给一句“可能有影响”。"
     if "健康" in question or "映射" in question:

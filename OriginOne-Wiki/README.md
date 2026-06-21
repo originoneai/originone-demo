@@ -5,7 +5,7 @@
 ```text
 raw/    原始材料，先留住事实
 wiki/   编织后的长期知识，给检索和复用用
-output/ 本次任务产物，比如回答、清单、文章草稿
+output/ 本次任务产物，比如回答、清单、报告草稿
 ```
 
 ## 为什么先不用 Obsidian
@@ -39,8 +39,8 @@ bash scripts/smoke_test.sh
 `smoke_test.sh` 会做四件事：
 
 - 检查 Python 脚本语法。
-- 跑通 `map` 和 `demo-all`。
-- 检查文章引用的 6 张终端截图是否存在。
+- 单独运行 `map`。
+- 跑通 `demo-all`。
 - 校验 `design-package/` 是否包含完整设计文件。
 
 ## 阶段目录
@@ -54,43 +54,21 @@ bash scripts/smoke_test.sh
 | 04 | `04-scenario-data-dev/` | 数仓工作场景：DDL、宽表 SQL、schema change、健康报告、影响分析 |
 | 05 | `05-scenario-personal-kb/` | 个人/项目知识库：originals、source cards、规则、语义层、需求生成 |
 
-## 快速运行
+## 单独运行某一步
+
+如果只想体验某个阶段，可以在 `OriginOne-Wiki/` 目录内执行：
 
 ```bash
-git clone https://github.com/originoneai/originone-demo.git
-cd originone-demo/OriginOne-Wiki
 python3 scripts/llm_wiki_demo.py map
 python3 scripts/llm_wiki_demo.py ask 00-minimal-raw-wiki-output "raw wiki output 区别是什么"
 python3 scripts/llm_wiki_demo.py weave 02-ingest-and-weave
 python3 scripts/llm_wiki_demo.py ask 02-ingest-and-weave "LLM-Wiki 怎么把 raw 编织成 wiki"
-python3 scripts/llm_wiki_demo.py demo-all
-```
-
-如果要重新生成文章截图，使用这条命令：
-
-```bash
-python3 -m pip install -r requirements.txt
-bash scripts/regenerate_screenshots.sh
 ```
 
 如果只想校验设计包：
 
 ```bash
 python3 scripts/validate_design_package.py design-package
-```
-
-## 文章草稿
-
-完整文章草稿在：
-
-```text
-article/LLM-Wiki-0-1-新手终端案例.md
-```
-
-截图素材会生成在：
-
-```text
-assets/screenshots/
 ```
 
 ## 新手记住这句话

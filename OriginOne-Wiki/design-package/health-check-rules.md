@@ -4,15 +4,15 @@
 
 - 每次新增 raw 后。
 - 每次运行 weave 后。
-- 每次 output 准备放入文章前。
-- 每次截图生成后。
+- 每次 output 准备作为长期知识回写前。
+- 每次 smoke test 运行后。
 
 ## P0
 
 - raw 目录为空。
 - stage 缺少 raw/wiki/output 任一目录。
 - ask 没有保存 output。
-- 文章引用的截图文件不存在。
+- `smoke_test.sh` 运行失败。
 
 ## P1
 
@@ -26,7 +26,7 @@
 ## P2
 
 - README 只讲概念，没有运行命令。
-- 文章术语太密，没有解释 raw/wiki/output。
+- README 术语太密，没有解释 raw/wiki/output。
 - output 回写 wiki 的边界没有讲清楚。
 - 04 没有解释 DDL/SQL/schema change 怎么进入影响分析。
 - 05 没有解释 originals/cards/wiki/output 的职责差异。
@@ -36,12 +36,12 @@
 - 目录是否存在。
 - 文件是否存在。
 - 脚本是否能运行。
-- 截图 PNG 是否生成。
+- smoke test 是否通过。
 - design-package 是否通过 validator。
 
 ## agent_review_required
 
-- 文章是否适合新手。
+- README 是否适合新手。
 - 场景是否贴近日常工作。
 - 是否把 output 和 wiki 混在一起。
 - 是否解释了由取倒推存。
@@ -49,13 +49,13 @@
 ## owner_approval_required
 
 - 是否要接真实 LLM API。
-- 是否要把文章发布到公众号。
+- 是否要单独制作课程材料。
 - 是否加入更多场景。
 
 ## fix_queue
 
 - 缺目录：补目录和 README。
-- 缺截图：重新运行 transcript 和截图脚本。
+- smoke test 失败：按失败步骤修复脚本、目录或设计包。
 - 检索效果不清楚：补 raw 材料或 wiki 说明。
 - 04 场景过轻：补 DDL、宽表 SQL、schema change、health-check、impact-analysis。
 - 05 场景过轻：补 project brief、source card、rules、semantic layer、requirements output。

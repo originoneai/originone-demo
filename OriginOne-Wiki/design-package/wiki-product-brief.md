@@ -15,18 +15,18 @@
 - 手写 Markdown 原始材料。
 - 两个演示场景：数据开发、个人知识库。
 - 终端命令输出。
-- 生成的 wiki 页面、ask output 和截图素材。
+- 生成的 wiki 页面和 ask output。
 
 ## processing
 
-先用 deterministic Python 脚本模拟 LLM-Wiki 的最小动作：读取 raw、生成 source summary、合并 concept wiki、更新 index、按 wiki-first 顺序检索并保存 output。后续文章再解释真实 LLM 可以替换摘要和编织步骤，但目录合同不变。
+先用 deterministic Python 脚本模拟 LLM-Wiki 的最小动作：读取 raw、生成 source summary、合并 concept wiki、更新 index、按 wiki-first 顺序检索并保存 output。后续真实 LLM 可以替换摘要和编织步骤，但目录合同不变。
 
 ## outputs
 
 - 可运行 demo 目录。
 - 每个阶段的 README。
-- 公众号/教程文章草稿。
-- 终端截图 PNG。
+- 可复现的终端运行结果。
+- 可检查的 output 产物。
 - raw/wiki/output 三层示例。
 - 两个场景化演进案例。
 
@@ -44,8 +44,8 @@
 - 新手能运行 `weave` 看到 raw 生成 wiki 文件。
 - 新手能运行 `ask` 看到检索顺序和命中来源。
 - 每个阶段都有 README、raw/wiki/output 目录。
-- 至少生成 5 张终端截图素材。
-- 文章能从最小目录讲到两个场景演进。
+- `smoke_test.sh` 能从最小目录跑到两个场景演进。
+- 读者能通过 README 复制命令运行 demo。
 
 ## constraints
 
