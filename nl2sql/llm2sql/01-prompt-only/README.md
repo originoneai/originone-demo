@@ -8,29 +8,38 @@
 
 | 文件 | 作用 |
 |---|---|
+| `cli.py` | **交互终端（主入口）**：敲中文问题，当场把 Prompt→SQL→门禁→结果跑给你看 |
 | `build_dataset.py` | 生成 SQLite 电商样例库 `ecommerce.db`（固定随机种子，可复现） |
 | `guard.py` | 只读门禁：拦写操作/多语句，缺 LIMIT 自动补 |
-| `prompt_only.py` | runner：手写 Prompt → LLM 出 JSON → 门禁 → SQLite 执行 → Trace/Summary |
+| `prompt_only.py` | 一次性 runner：教师基准 / 单次调用，出 Trace/Summary |
 | `test_lab.py` | 本地测试：建库、教师基准、门禁、扇出演示、LLM 真实链路 |
 
-## 快速开始
+## 快速开始：先玩交互终端
+
+不预制题目，启动后你想问什么问什么，亲眼看它答对，也亲眼看它翻车：
 
 ```bash
 pip install -r requirements.txt
+export DEEPSEEK_API_KEY=你的key
+python cli.py
+```
 
-# 1) 建库
-python build_dataset.py
+启动后直接敲中文，例如「最近 30 天每天的支付订单数和支付金额是多少？」或
+「华东地区各类目的支付金额是多少？」。终端会一步步显示：模型生成的 SQL、它的假设与风险、
+门禁判定、以及 SQLite 里跑出来的结果。`\schema` 看表结构，`\q` 退出。
 
-# 2) 教师基准（离线，不调 LLM，先验证链路本身）
+## 其它用法
+
+```bash
+# 教师基准（离线，不调 LLM，验证链路本身）
 python prompt_only.py --teacher
 
-# 3) 真实 LLM 链路（DeepSeek，OpenAI 兼容）
-export DEEPSEEK_API_KEY=你的key
-python prompt_only.py --trace
+# 单次调用 + 完整 Trace
+DEEPSEEK_API_KEY=你的key python prompt_only.py --trace
 
-# 4) 跑测试
-python test_lab.py            # 不带 key 只跑确定性部分
-DEEPSEEK_API_KEY=你的key python test_lab.py   # 带 key 连 LLM 一起测
+# 跑测试（不带 key 只跑确定性部分；带 key 连 LLM 一起测）
+python test_lab.py
+DEEPSEEK_API_KEY=你的key python test_lab.py
 ```
 
 ## 数据集
