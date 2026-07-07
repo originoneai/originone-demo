@@ -1,0 +1,4 @@
+requests
+sqlalchemy>=2.0
+# mcp 包非必需：本课的循环用 DeepSeek 的 function calling 直接驱动四个工具函数。
+# 想改成经由真正的 MCP Server（stdio）驱动，见 03-mcp-server-min，并额外装 mcp。
