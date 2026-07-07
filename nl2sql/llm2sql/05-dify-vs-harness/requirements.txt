@@ -1,0 +1,4 @@
+requests
+sqlalchemy>=2.0
+# Dify 本体不在本目录跑：本课先用 flow.py 在代码里把 Dify Chatflow 的机制跑通，
+# dify-chatflow.yml 是对着搭的蓝图。想在真 Dify 里跑，另装 Dify 并接上 03 的 MCP Server。

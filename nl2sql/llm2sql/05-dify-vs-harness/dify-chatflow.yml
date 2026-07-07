@@ -1,0 +1,77 @@
+# Dify Chatflow 蓝图（参考版）——和本目录 flow.py 的节点一一对应。
+#
+# 用途：如果你装了 Dify，可以按这张图在画布上把同一条流水线拖出来，
+# 亲眼看到"代码里的固定节点"就是"画布上的固定连线"。这不是可直接导入的完整 DSL
+# （MCP 工具节点、模型凭据要在你自己的 Dify 里配），而是让你对着搭的蓝图。
+#
+# 先决条件：把 03-mcp-server-min 以 HTTP transport 起成 MCP Server，
+# 在 Dify 工作区 Tools → MCP 里加进来（Server ID 固定，别乱改）。
+
+app:
+  name: ecommerce-chatbi
+  mode: advanced-chat        # Chatflow
+  description: 电商问数 ChatBI（编排版）——节点顺序人画死，Guard 永远在 execute 之前
+
+# 关键点：这张图里"谁接谁"是人连的死线，模型无权改。
+# 对照 04 的 Harness——那里没有这张图，下一步调哪个工具由模型临场决定。
+workflow:
+  nodes:
+    - id: start
+      type: start
+      title: 接收用户问题
+      outputs: [question]
+
+    - id: mcp_describe_table
+      type: tool                    # MCP 工具节点
+      title: 读订单表结构
+      tool: describe_table
+      params:
+        table: { type: fixed, value: ord_order_main }   # ← Fixed：这条线只认这张表
+      # 注：list_tables 这类 discovery 工具在生产编排里常被省掉，
+      #     因为要查哪张表是设计阶段就定死的，不需要运行时再列一遍。
+
+    - id: llm_generate_sql
+      type: llm
+      title: 生成 SQL
+      model: { provider: deepseek, name: deepseek-chat, params: { temperature: 0 } }
+      prompt: |
+        你是 SQL 生成器。根据 {{mcp_describe_table.schema}}，
+        为问题 {{start.question}} 写一条 SQLite 只读 SELECT，只输出 {"sql": "..."}。
+      output: sql_json
+
+    - id: guard
+      type: code                    # 代码节点：只读门禁
+      title: SQL Guard（拦写操作/多语句，缺 LIMIT 补上）
+      # 这个节点画在 execute 前面，是整张图的安全命门：
+      # 生产上"是否校验"绝不能交给模型自觉，必须由这条死线保证。
+      inputs: { sql: "{{llm_generate_sql.sql_json.sql}}" }
+      outputs: [decision, effective_sql]
+
+    - id: mcp_execute_query
+      type: tool
+      title: 执行查询
+      tool: execute_query
+      params:
+        sql: { type: ref, value: "{{guard.effective_sql}}" }   # 只跑门禁放行后的 SQL
+      # 只有 guard.decision ∈ {allow, rewrite} 时这条边才被走到。
+
+    - id: llm_answer
+      type: llm
+      title: 一句话回答
+      model: { provider: deepseek, name: deepseek-chat }
+      prompt: 根据 {{mcp_execute_query.rows}} 用一句中文回答 {{start.question}}。
+
+    - id: answer
+      type: answer
+      title: 输出
+      answer: "{{llm_answer.text}}"
+
+  # 死线：start → describe → 生成SQL → guard → execute → answer。
+  # 这几条边是人画的，运行时一条都不会变——这就是"编排"的全部秘密，也是它的天花板。
+  edges:
+    - { source: start, target: mcp_describe_table }
+    - { source: mcp_describe_table, target: llm_generate_sql }
+    - { source: llm_generate_sql, target: guard }
+    - { source: guard, target: mcp_execute_query, condition: "decision in [allow, rewrite]" }
+    - { source: mcp_execute_query, target: llm_answer }
+    - { source: llm_answer, target: answer }
