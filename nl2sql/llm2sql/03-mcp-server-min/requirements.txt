@@ -1,0 +1,3 @@
+sqlalchemy>=2.0
+mcp>=1.0
+# 换库时按需再装驱动：mysql 用 pymysql，postgresql 用 psycopg
